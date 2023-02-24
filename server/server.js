@@ -3,7 +3,10 @@ const app = express();
 const port = process.env.PORT || 5001;
 app.use(express.json());
 
-// REQUEST FUNCTIONS GO HERE
+// Array to store inputs and calc type
+let calcInput = [];
+
+// Request functions go here
 
 
 app.use(express.static('server/public'));

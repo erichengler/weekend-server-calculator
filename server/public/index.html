@@ -15,13 +15,13 @@
         <br />
     <div id="calculator">
         <input type="number" id="input1" />
-        <button id="addButton">+</button>
-        <button id="subtractButton">-</button>
-        <button id="multiplyButton">*</button>
-        <button id="divideButton">/</button>
+        <button onclick="add()" id="addButton">+</button>
+        <button onclick="subtract()" id="subtractButton">-</button>
+        <button onclick="multiply()" id="multiplyButton">*</button>
+        <button onclick="divide()" id="divideButton">/</button>
         <input type="number" id="input2" />
-        <button id="equalsButton">=</button>
-        <button id="clearButton">C</button>
+        <button onclick="equals()" id="equalsButton">=</button>
+        <button onclick="clearInput()" id="clearButton">C</button>
     </div>
         <br />
         <br />
@@ -35,6 +35,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="client.js"></script>
+    <script src="scripts/client.js"></script>
 </body>
 </html>
