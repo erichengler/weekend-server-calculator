@@ -1,0 +1,22 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#answer {
+    font-size: 60px;
+}
+
+#history {
+    font-size: 24px
+}
+
+button {
+    width: 38px;
+    height: 38px;
+}
+
+input {
+    width: 250px;
+    height: 36px;
+    font-size: larger;
+}
