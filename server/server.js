@@ -1,3 +1,4 @@
+// Server stuff
 const express = require( 'express' );
 const app = express();
 const port = process.env.PORT || 5001;
@@ -7,13 +8,13 @@ app.use(express.json());
 let calcInputArray = [];
 let currentAnswer;
 
-// GET request for input data and calculation type
+// GET request to return calculations from server
 app.get( '/history', (req, res) => {
     console.log( 'GET request made for /history' );
     res.send( calcInputArray );
 });
 
-// POST request for input data and operation type in history
+// POST request to save user input data and operation type
 app.post( '/history', (req, res) => {
     console.log( 'POST request made for /history' );
     let currentCalc = req.body;
@@ -28,16 +29,15 @@ app.post( '/history', (req, res) => {
     } else if ( currentCalc.calcType === '/' ) {
         currentAnswer = Number(currentCalc.input1) / Number(currentCalc.input2);
     }
-    console.log( currentAnswer );
+    // Adds the current answer to the currentCalc object as a key
     currentCalc.answer = currentAnswer;
-
+    // Pushes currentCalc object into the array
     calcInputArray.push( currentCalc );
     console.log( calcInputArray );
     res.sendStatus(201);
 });
 
-
-
+// Server stuff
 app.use(express.static('server/public'));
 app.listen(port, () => {
     console.log(`listening on port: ${port}`);

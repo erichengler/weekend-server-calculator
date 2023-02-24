@@ -1,8 +1,8 @@
 console.log( 'hello world' );
 
-// Variables to tell calculator whether it is adding, subtracting, multiplying or diving
+// Variable to tell calculator whether it is adding, subtracting, multiplying or diving
 let calculation = ''
-// Functions to change from one calculation to another
+// Operation functions to change from one operation to another
 function add() {
     calculation = '+';
     document.getElementById("addButton").style.border = "2px solid black"
@@ -43,17 +43,19 @@ function clearInput() {
     document.getElementById("subtractButton").style.border = ""
     document.getElementById("multiplyButton").style.border = ""
 }
-// Equals function to send input data and calculation type to the server
+// Equals function to send input data and operation type to the server
 function equals() {
     let historyDiv = document.querySelector('#history');
     historyDiv.innerHTML = '';
 
+    // Object to send to server based on user inputs and operation type
     let calculationForServer = {
         input1: document.querySelector('#input1').value,
         calcType: calculation,
         input2: document.querySelector('#input2').value,
     }
 
+    // Axios request matching the POST request from server.js
     axios.post( '/history', calculationForServer ).then((response) => {
         console.log( response );
     }).catch((error)=> {
@@ -61,10 +63,14 @@ function equals() {
         alert('something went wrong');
     });
 
+    // Axios request matching the GET request from server.js
     axios.get( '/history' ).then((response) => {
         let equationsFromServer = response.data;
-        console.log( equationsFromServer);
+        console.log( equationsFromServer );
         for ( let equation of equationsFromServer ) {
+            let answerDiv = document.querySelector('#answer');
+            answerDiv.innerHTML = equation.answer
+
             historyDiv.innerHTML += `
             <p>${equation.input1} ${equation.calcType} ${equation.input2} = ${equation.answer}</p>
             `;
