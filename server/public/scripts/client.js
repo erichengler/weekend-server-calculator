@@ -1,46 +1,31 @@
 console.log( 'hello world' );
 
 // Variables to tell calculator whether it is adding, subtracting, multiplying or diving
-let addition = false;
-let subtraction = false;
-let multiplication = false;
-let division = false;
+let calculation = ''
 // Functions to change from one calculation to another
 function add() {
-    addition = true;
-    subtraction = false;
-    multiplication = false;
-    division = false;
+    calculation = '+';
     document.getElementById("addButton").style.border = "2px solid black"
     document.getElementById("subtractButton").style.border = ""
     document.getElementById("multiplyButton").style.border = ""
     document.getElementById("divideButton").style.border = ""
 }
 function subtract() {
-    addition = false;
-    subtraction = true;
-    multiplication = false;
-    division = false;
+    calculation = '-';
     document.getElementById("subtractButton").style.border = "2px solid black"
     document.getElementById("addButton").style.border = ""
     document.getElementById("multiplyButton").style.border = ""
     document.getElementById("divideButton").style.border = ""
 }
 function multiply() {
-    addition = false;
-    subtraction = false;
-    multiplication = true;
-    division = false;
+    calculation = '*';
     document.getElementById("multiplyButton").style.border = "2px solid black"
     document.getElementById("addButton").style.border = ""
     document.getElementById("subtractButton").style.border = ""
     document.getElementById("divideButton").style.border = ""
 }
 function divide() {
-    addition = false;
-    subtraction = false;
-    multiplication = false;
-    division = true;
+    calculation = '/';
     document.getElementById("divideButton").style.border = "2px solid black"
     document.getElementById("addButton").style.border = ""
     document.getElementById("subtractButton").style.border = ""
@@ -52,21 +37,37 @@ function clearInput() {
     let input2 = document.getElementById('input2')
     input1.value = '';
     input2.value = '';
-    addition = false;
-    subtraction = false;
-    multiplication = false;
-    division = false;
+    calculation = '';
     document.getElementById("divideButton").style.border = ""
     document.getElementById("addButton").style.border = ""
     document.getElementById("subtractButton").style.border = ""
     document.getElementById("multiplyButton").style.border = ""
 }
+// Equals function to send input data and calculation type to the server
+function equals() {
+    let historyDiv = document.querySelector('#history');
+    historyDiv.innerHTML = '';
 
+    let calculationForServer = {
+        input1: document.querySelector('#input1').value,
+        calcType: calculation,
+        input2: document.querySelector('#input2').value,
+    }
 
+    axios.post( '/history', calculationForServer ).then((response) => {
+        console.log( response );
+    }).catch((error)=> {
+        console.log(error);
+        alert('something went wrong');
+    });
 
-
-function calculator () {
-    let input1 = document.querySelector('#input1');
-    let calcType;
-    let input2 = document.querySelector('#input2');
+    axios.get( '/history' ).then((response) => {
+        let equationsFromServer = response.data;
+        console.log( equationsFromServer);
+        for ( let equation of equationsFromServer ) {
+            historyDiv.innerHTML += `
+            <p>${equation.input1} ${equation.calcType} ${equation.input2}</p>
+            `;
+        }
+    });
 }
