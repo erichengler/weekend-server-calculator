@@ -66,8 +66,11 @@ function equals() {
         console.log( equationsFromServer);
         for ( let equation of equationsFromServer ) {
             historyDiv.innerHTML += `
-            <p>${equation.input1} ${equation.calcType} ${equation.input2}</p>
+            <p>${equation.input1} ${equation.calcType} ${equation.input2} = ${equation.answer}</p>
             `;
         }
+    }).catch((error)=> {
+        console.log(error);
+        alert('something went wrong');
     });
 }
