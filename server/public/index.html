@@ -26,39 +26,46 @@
         <br />
         <br />
         <br />
-    <input id="stretchInput" />
+    <input value='' id="stretchInput" />
     <button onclick="clearStretch()">C</button>
         <br />
         <br />
     <div id="stretchCalculator">
-        <button onclick="stretchNum()">7</button>
-        <button onclick="stretchNum()">8</button>
-        <button onclick="stretchNum()">9</button>
-        <button onclick="stretchOp()">+</button>
+        <button onclick="stretchNum(event)">7</button>
+        <button onclick="stretchNum(event)">8</button>
+        <button onclick="stretchNum(event)">9</button>
+        <button onclick="stretchOp(event)">+</button>
         <br />
-        <button onclick="stretchNum()">4</button>
-        <button onclick="stretchNum()">5</button>
-        <button onclick="stretchNum()">6</button>
-        <button onclick="stretchOp()">-</button>
+        <button onclick="stretchNum(event)">4</button>
+        <button onclick="stretchNum(event)">5</button>
+        <button onclick="stretchNum(event)">6</button>
+        <button onclick="stretchOp(event)">-</button>
         <br />
-        <button onclick="stretchNum()">1</button>
-        <button onclick="stretchNum()">2</button>
-        <button onclick="stretchNum()">3</button>
-        <button onclick="stretchOp()">*</button>    
+        <button onclick="stretchNum(event)">1</button>
+        <button onclick="stretchNum(event)">2</button>
+        <button onclick="stretchNum(event)">3</button>
+        <button onclick="stretchOp(event)">*</button>    
         <br />
-        <button onclick="stretchNum()">0</button>
-        <button onclick="stretchNum()">.</button>
+        <button onclick="stretchNum(event)">0</button>
+        <button onclick="stretchNum(event)">.</button>
         <button onclick="stretchEquals()">=</button>
-        <button onclick="stretchOp()">/</button>   
+        <button onclick="stretchOp(event)">/</button>   
         <br />
         <br />
         <br />
+        <h3>Answer</h3>
     <div id="answer">
 
     </div>
         <br />
         <br />
+    <h3>Base Mode History</h3>
     <div id="history">
+
+    </div>
+        <br />
+    <h3>Stretch Mode History</h3>
+    <div id="stretchHistory">
 
     </div>
 

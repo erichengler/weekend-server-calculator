@@ -1,7 +1,11 @@
 console.log( 'hello world' );
 
+// Stretch input field querySelector
+let stretchInput = document.querySelector('#stretchInput');
+
 // Variable to tell calculator whether it is adding, subtracting, multiplying or diving
 let calculation = ''
+
 // Operation functions to change from one operation to another
 function add() {
     calculation = '+';
@@ -43,17 +47,61 @@ function clearInput() {
     document.getElementById("subtractButton").style.border = ""
     document.getElementById("multiplyButton").style.border = ""
 }
+
+// Clear function to clear stretch input field
+function clearStretch() {
+    stretchInput.value = '';
+}
+
+// Function to select operation type on stretch calculator ( tried a shortcut version )
+function stretchOp(event) {
+    calculation = event.target.innerHTML;
+    // If stretch input field is empty, create a '-' for negative numbers
+    if ( calculation === '-' && stretchInput.value === '' ) {
+        stretchInput.value = '-';
+    } 
+    // If input field is not empty or starting with a '-', add operation to input field
+    if ( stretchInput.value !== '' && stretchInput.value !== '-' ) {
+        stretchInput.value += calculation;
+    }
+}
+
+// Function to add numbers to stretch input field on button press
+function stretchNum(event) {
+    stretchInput.value += event.target.innerHTML;
+}
+
+// The only working alternative to using eval that I found in my research (not sure what this is doing but it works)
+// I realize this isn't following the rules of having the calculator logic on the server side, but I couldn't figure that out for the stretch side
+// I maybe could have done it with only 2 numbers plugged into my input1 and input2 but adding 2+ operation types and 3+ numbers made it difficult
+function iCopiedThis(fn) {
+    return new Function('return ' + fn)();
+  }
+  
+ function stretchEquals() {
+    let answerDiv = document.querySelector('#answer');
+    answerDiv.innerHTML = iCopiedThis( stretchInput.value )
+
+   let stretchHistoryDiv = document.querySelector('#stretchHistory');
+    stretchHistoryDiv.innerHTML += `
+        ${stretchInput.value} = ${answerDiv.innerHTML}<br /><br />
+    `;
+    stretchInput.value = '';
+ }
+
+
+
 // Equals function to send input data and operation type to the server
 function equals() {
     let historyDiv = document.querySelector('#history');
     historyDiv.innerHTML = '';
 
     // Object to send to server based on user inputs and operation type
-    let calculationForServer = {
-        input1: document.querySelector('#input1').value,
-        calcType: calculation,
-        input2: document.querySelector('#input2').value,
-    }
+        let calculationForServer = {
+            input1: document.querySelector('#input1').value,
+            calcType: calculation,
+            input2: document.querySelector('#input2').value,
+        }
 
     // Axios request matching the POST request from server.js
     axios.post( '/history', calculationForServer ).then((response) => {

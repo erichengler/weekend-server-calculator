@@ -2,11 +2,19 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+h3 {
+    text-decoration: underline;
+}
+
 #answer {
     font-size: 60px;
 }
 
 #history {
+    font-size: 24px
+}
+
+#stretchHistory {
     font-size: 24px
 }
 
