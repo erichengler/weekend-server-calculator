@@ -48,6 +48,10 @@ function clearInput() {
     document.getElementById("multiplyButton").style.border = ""
 }
 
+
+
+// * STRETCH FUNCTIONS *
+
 // Clear function to clear stretch input field
 function clearStretch() {
     stretchInput.value = '';
@@ -89,6 +93,13 @@ function iCopiedThis(fn) {
     stretchInput.value = '';
  }
 
+function deleteStretch() {
+    let stretchHistoryDiv = document.querySelector('#stretchHistory');
+    stretchHistoryDiv.innerHTML = '';
+}
+
+// * END OF STRETCH FUNCTIONS
+
 
 
 // Equals function to send input data and operation type to the server
@@ -127,4 +138,15 @@ function equals() {
         console.log(error);
         alert('something went wrong');
     });
+}
+
+// Function to delete entire history
+function deleteBase() {
+    let historyDiv = document.querySelector('#history');
+    historyDiv.innerHTML = '';
+    axios.delete( `/history` ).then((response) => {
+    }).catch((error) => {
+        console.log( error );
+        alert( 'Something went wrong.' );
+    })
 }

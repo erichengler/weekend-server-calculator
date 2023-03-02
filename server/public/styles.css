@@ -23,6 +23,11 @@ button {
     height: 38px;
 }
 
+.deleteHistory {
+    width: auto;
+    height: auto;
+}
+
 input {
     width: 250px;
     height: 36px;

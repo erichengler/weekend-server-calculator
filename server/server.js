@@ -37,6 +37,14 @@ app.post( '/history', (req, res) => {
     res.sendStatus(201);
 });
 
+// Delete request to remove calculation history
+app.delete( '/history', (req, res) => {
+    console.log( req.params.id );
+    calcInputArray = [];
+    res.sendStatus(200);
+})
+
+
 // Server stuff
 app.use(express.static('server/public'));
 app.listen(port, () => {
