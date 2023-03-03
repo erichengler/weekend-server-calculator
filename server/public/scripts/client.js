@@ -4,7 +4,7 @@ console.log( 'hello world' );
 let stretchInput = document.querySelector('#stretchInput');
 
 // Variable to tell calculator whether it is adding, subtracting, multiplying or diving
-let calculation = ''
+let calculation = '';
 
 // Operation functions to change from one operation to another
 function add() {
