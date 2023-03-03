@@ -104,6 +104,13 @@ function deleteStretch() {
 
 // Equals function to send input data and operation type to the server
 function equals() {
+if ( calculation === '' || 
+document.querySelector('#input1').value === '' || 
+document.querySelector('#input2').value === '' ) {
+    alert(`Please make sure an operation type is selected and both input fields have a number in them.`)
+    return;
+}
+
     let historyDiv = document.querySelector('#history');
     historyDiv.innerHTML = '';
 
