@@ -20,3 +20,7 @@ Node.js
 2. Run npm start in your terminal
 3. Navigate to localhost:5001 in your browser
 
+# Deployment
+
+I deployed this app to heroku as a stretch goal. It can be found here: https://quiet-retreat-03554.herokuapp.com/
+
